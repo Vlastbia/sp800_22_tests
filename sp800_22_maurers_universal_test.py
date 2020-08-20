@@ -44,7 +44,8 @@ def maurers_universal_test(bits,patternlen=None, initblocks=None):
         L = 6
         if n < 387840:
             print("Error. Need at least 387840 bits. Got %d." % n)
-            exit()
+            #exit()
+            return False,0.0,None
         for threshold in ns:
             if n >= threshold:
                 L += 1 
@@ -91,7 +92,7 @@ def maurers_universal_test(bits,patternlen=None, initblocks=None):
                  3.419,3.421]
                  
     # sigma = math.sqrt(var_table[L])
-    mag = abs((fn - ev_table[L])/((math.sqrt(var_table[L]))*math.sqrt(2)))
+    mag = abs((fn - ev_table[L]) / ((0.7 - 0.8 / L + (4 + 32 / L) * (pow(K, -3 / L)) / 15) * (math.sqrt(var_table[L] / K)) * math.sqrt(2)))
     P = math.erfc(mag)
 
     success = (P >= 0.01)
